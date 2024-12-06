@@ -25,8 +25,6 @@ To get to know the project files, you can see the project structure here:
  └── MIP/ # MIP solution files
 ```
 
-
-
 ### 1. Install Docker
 
 #### For macOS:
@@ -71,6 +69,7 @@ Make sure Docker Desktop is running before executing following commands.
    cd ~/Downloads/multi-courier-solver
    ```
 3. Build the Docker image:
+
    ```bash
    docker build -t multi-courier-solver .
    ```
@@ -93,8 +92,6 @@ Make sure Docker Desktop is running before executing following commands.
    docker build -t multi-courier-solver .
    ```
 
-
-when we run the solver to solve an instance, the code gives us a JSON output as a solution to that instance which can be found under the res folder
 
 ## Usage
 
@@ -120,14 +117,12 @@ As we want out output in the JSON format, we have to mount volume while we want 
 
    before going to SMT and MIP, there is a brief description about different models of the Minizinc:
 
-
    #model_01:
    #model_02:
    ....
    ` To be COMPLETED`
 
-
-2. **SMT Solver**:
+3. **SMT Solver**:
 
    ```shell
    docker run -v "$(pwd)/res":/app/res multi-courier-solver SMT 5
@@ -155,7 +150,7 @@ As we want out output in the JSON format, we have to mount volume while we want 
    docker run -v "$(pwd)/res":/app/res multi-courier-solver SMT ALL
    ```
 
-3. **MIP Solver**:
+4. **MIP Solver**:
    Runing MIP solver is almost similar to SMT but with the small difference that you can choose what method the solver choose among: CBC, HIGHS, Goroubi. Below you can see an example of how you can run MIP solver.
 
    ```shell
@@ -171,9 +166,18 @@ As we want out output in the JSON format, we have to mount volume while we want 
 
    ```
 
+5. **Run all solvers**:
+   To run all 3 solvers on specific instances you can simply use the following commands:
 
+   ```shell
+   docker run -v "$(pwd)/res":/app/res multi-courier-solver all_solvers 9:cbc:model_01
 
-Therefore, you can solve one specific instance or a range of instances with any possible method.
+   docker run -v "$(pwd)/res":/app/res multi-courier-solver all_solvers 3:5:highs:model_04
+
+   docker run -v "$(pwd)/res":/app/res multi-courier-solver all_solvers 1:21:highs:model_04
+   ```
+
+   The first command is for running only one instance using all different solvers. Furthermore, you can give the range of instances so it can be solved with different solvers
 
 ### Solution Output
 
@@ -188,5 +192,3 @@ json
 "sol": array // Solution paths for each courier
 }
 ```
-
-
