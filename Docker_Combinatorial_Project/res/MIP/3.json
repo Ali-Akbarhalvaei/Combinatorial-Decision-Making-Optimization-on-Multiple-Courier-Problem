@@ -1,0 +1,21 @@
+{
+   "gurobi": {
+      "time": 0.08724021911621094,
+      "optimal": true,
+      "obj": 0,
+      "sol": [
+         [
+            0,
+            "No Outgoing Edges"
+         ],
+         [
+            0,
+            "No Outgoing Edges"
+         ],
+         [
+            0,
+            "No Outgoing Edges"
+         ]
+      ]
+   }
+}
